@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Screw Efficiency</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+<p>
+$$ e_f = (\tan\lambda)\left( \frac{\cos\phi_n - \mu\tan\lambda}{\cos\phi_n\tan\lambda + \mu} \right) $$
+$$ e_b = 2 - \frac{1}{e_f} $$
+<table border="0">
+  <tr><th>
+	  Lead Angle
+	  </th><td>
+	  $\lambda$ 
+	  </td><td>
+	  [deg]
+	  </td><td><input id="box1" type="number" onkeyup="calculate()" /></td></tr>
+  <tr><th>
+	  Thread Angle
+	  </th><td>
+	  $\phi_n$
+	  </td><td>
+	  [deg]
+	  </td><td><input id="box2" type="number" onkeyup="calculate()" /></td></tr>
+  <tr><th>
+	  Coefficient of Friction
+	  </th><td>
+	  $\mu$
+	  </td><td>
+	  [~]
+	  </td><td><input id="box3" type="number" onkeyup="calculate()" /></td>
+  </tr><tr><th>$~$</th></tr>
+  <tr><th>
+	  Forward Efficiency
+	  </th><td>
+	  $e_f$ 
+	  </td><td>
+	  [%]
+	  </td><td><input id="result1" /></td></tr>
+   <tr><th>
+	  Reverse Efficiency
+	  </th><td>
+	  $e_b$ 
+	  </td><td>
+	  [%]
+	  </td><td><input id="result2" /></td></tr>
+</table>
+</p>
+</body>
+<script>
+	MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+	window.onload = function (){
+		   defaultVal1 = 8;
+		   defaultVal2 = 0;
+		   defaultVal3 = 0.01;
+		  
+		  document.getElementById('box1').value = defaultVal1;
+		  document.getElementById('box2').value = defaultVal2;
+		  document.getElementById('box3').value = defaultVal3;
+		  calculate()
+		}
+
+		function calculate(){ 
+						console.log(1);
+						 var myLambda = document.getElementById('box1').valueAsNumber*Math.PI/180;		 
+						 var myPhin = document.getElementById('box2').valueAsNumber*Math.PI/180;
+						 var myMu = document.getElementById('box3').valueAsNumber+0;
+						 var result1 = document.getElementById('result1');
+						 var result2 = document.getElementById('result2');
+						 var myResult = 100*((Math.tan(myLambda))*((Math.cos(myPhin))-(myMu*(Math.tan(myLambda)))))/((Math.cos(myPhin))*(Math.tan(myLambda)) + myMu);
+						 result1.value = myResult;
+						 result2.value = 2 - (100/myResult);
+		}
+</script>
+</html>
